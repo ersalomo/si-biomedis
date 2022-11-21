@@ -3,8 +3,6 @@
 @section('content')
     <div class="content">
         <div class="row">
-
-
             <div class="col-lg-3 col-sm-6 col-12 d-flex">
                 <div class="dash-count">
                     <div class="dash-counts">

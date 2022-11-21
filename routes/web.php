@@ -40,7 +40,7 @@ Route::group([
 
     Route::controller(AnamnesaController::class)->group(function () {
         Route::get('show-data-anamnesa', 'showDataAnamnesa')->name('data-anamnesa');
-        Route::get('tambah-anamnesa/{?pasien:uuid}', 'tambahAnamnesa')->name('tambah-anamnesa');
+        Route::get('tambah-anamnesa/{pasien:uuid?}', 'tambahAnamnesa')->name('tambah-anamnesa');
         Route::post('tambah', 'create')->name('create-anamnesa');
     });
 });

@@ -12,6 +12,9 @@
     <div class="main-wrapper">
         <div class="row justify-content-center">
             <div class="col-4 card mt-5">
+                @if (Session::has('error'))
+                    <span class="alert alert-danger text-center"><strong>{{ Session::get('error') }}</strong> </span>
+                @endif
                 <form action="{{ route('auth.login') }}" method="post">
                     @csrf
                     <div class="form-group mt-2">
