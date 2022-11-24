@@ -23,7 +23,7 @@
                 <div class="dash-count das1">
                     <div class="dash-counts">
                         <h4>{{ $anamnesa }}</h4>
-                        <h5>Suppliers</h5>
+                        <h5>Data Anamnesa Pasien</h5>
                     </div>
                     <div class="dash-imgs">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

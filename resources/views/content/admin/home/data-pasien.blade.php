@@ -66,7 +66,7 @@
                                             <a class="me-3" href="">
                                                 <img src="{{ asset('assets/img/icons/edit.svg') }}" palt="img">
                                             </a>
-                                            <a class="me-3" href="{{ url('tambah-anamnesa/' . $pasien->uuid) }}">
+                                            <a class="me-3" href="{{ url('d/tambah-anamnesa/' . $pasien->uuid) }}">
                                                 <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img">
                                             </a>
 

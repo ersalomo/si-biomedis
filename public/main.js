@@ -4,7 +4,9 @@ $(function () {
             $.ajax({
                 url: e.target["action"],
                 method: e.target["method"],
-                data: new FormData(e.target),
+                headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                // data: new FormData(e.target),
+                data:Object.assign(new FormData(e.target),{'_token':"{{csrf_token()}}"}),
                 processData: false,
                 dataType: "json",
                 contentType: false,
@@ -31,5 +33,4 @@ $(function () {
         e.stopPropagation();
         $('#form-pasien').find("span.error-text").text("");
     })
-
 });

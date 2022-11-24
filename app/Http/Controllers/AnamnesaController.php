@@ -18,7 +18,6 @@ class AnamnesaController extends Controller
 
     public function tambahAnamnesa(Pasien $pasien)
     {
-
         $name = '';
         if ($pasien) $name = $pasien;
         return view('content.admin.home.tambah-anamnesa', [
