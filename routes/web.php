@@ -35,12 +35,12 @@ Route::group([
     Route::controller(PasienController::class)->group(function () {
         Route::get('show-data-pasien', 'showDataPasien')->name('data-pasien');
         Route::get('tambah-pasien', 'tambahPasien')->name('tambah-pasien');
-        Route::post('create-pasien', 'create')->name('create-pasien');
+        Route::post('create-pasien', 'store')->name('create-pasien');
     });
 
     Route::controller(AnamnesaController::class)->group(function () {
         Route::get('show-data-anamnesa', 'showDataAnamnesa')->name('data-anamnesa');
-        Route::get('tambah-anamnesa/{?pasien:uuid}', 'tambahAnamnesa')->name('tambah-anamnesa');
+        Route::get('tambah-anamnesa/{pasien}', 'tambahAnamnesa')->name('tambah-anamnesa');
         Route::post('tambah', 'create')->name('create-anamnesa');
     });
 });
