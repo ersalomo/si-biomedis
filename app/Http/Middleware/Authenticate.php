@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\URL;
 
 class Authenticate extends Middleware
 {
@@ -15,10 +16,10 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (!$request->expectsJson()) {
-            if ($request->routeIs('admin.')) {
-                session()->flash('error', 'login dulu');
+            if ($request->routeIs('admin.*')) {
+                session()->flash('error', 'Login terlebih dahulu');
                 return route('auth.index', [
-                    'fail' => false,
+                    'fail' => true,
                     'returnUrl' => URL::full()
                 ]);
             }

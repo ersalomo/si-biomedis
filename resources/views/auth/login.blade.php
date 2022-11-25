@@ -10,8 +10,12 @@
 
 <body class="account-page">
     <div class="main-wrapper">
-        <div class="row justify-content-center">
-            <div class="col-4 card mt-5">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-4 col-sm-8 card mt-5">
+                <h3 class="text-center text-uppercase text-bold mt-5">Login your account</h3>
+                @if (Session::has('error'))
+                    <span class="alert alert-danger text-center"><strong>{{ Session::get('error') }}</strong> </span>
+                @endif
                 <form action="{{ route('auth.login') }}" method="post">
                     @csrf
                     <div class="form-group mt-2">

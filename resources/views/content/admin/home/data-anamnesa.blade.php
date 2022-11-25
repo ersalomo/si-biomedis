@@ -8,8 +8,8 @@
                 <h6>Manage your products</h6>
             </div>
             <div class="page-btn">
-                <a href="{{ route('admin.tambah-anamnesa') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg"
-                        alt="img" class="me-1">Add New anamnesa</a>
+                <a href="{{ route('admin.tambah-anamnesa') }}" class="btn btn-added"><img
+                        src="{{ asset('assets/img/icons/plus.svg') }}" alt="img" class="me-1">Add New anamnesa</a>
             </div>
         </div>
 
@@ -57,13 +57,13 @@
                                         <td>{{ $anamnesa->created_at }}</td>
                                         <td>
                                             <a class="me-3" href="">
-                                                <img src="assets/img/icons/eye.svg" alt="img">
+                                                <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="img">
                                             </a>
                                             <a class="me-3" href="">
-                                                <img src="assets/img/icons/edit.svg" palt="img">
+                                                <img src="{{ asset('assets/img/icons/edit.svg') }}" palt="img">
                                             </a>
                                             <a class="me-3" href="{{ url('d/tambah-anamnesa/' . $anamnesa->uuid) }}">
-                                                <img src="assets/img/icons/plus.svg" alt="img">
+                                                <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img">
                                             </a>
 
                                         </td>
