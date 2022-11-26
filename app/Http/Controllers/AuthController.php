@@ -13,6 +13,7 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
+    
     public function login(AuthRequest $req)
     {
         $user =  $req->only(['email', 'password']);

@@ -11,8 +11,6 @@ use App\Http\Controllers\{
 };
 
 
-
-
 Route::get('/', fn () => to_route('admin.home'));
 Route::group(
     [
