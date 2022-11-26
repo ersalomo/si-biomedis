@@ -16,6 +16,11 @@ return new class extends Migration
         Schema::create('anamnesa_pasiens', function (Blueprint $table) {
             $table->id();
             $table->string('uuid_pasien');
+            $table->foreignId('id_obat')
+                ->nullable()
+                ->constrained('obat_models')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->string('anamnesa');
             $table->string('diagnosa');
             $table->string('pengobatan');

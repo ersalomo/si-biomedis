@@ -8,8 +8,10 @@
                 <h6>All records Pasien</h6>
             </div>
             <div class="page-btn">
-                <a href="{{ route('admin.tambah-pasien') }}" class="btn btn-added"><img
-                        src="{{ asset('assets/img/icons/plus.svg') }}" alt="img" class="me-1">Add New Pasien</a>
+
+                <button type="button" class="btn btn-added" id="btnTambahPasien">
+                    <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img" class="me-1">Add New Pasien
+                </button>
             </div>
         </div>
 
@@ -82,3 +84,36 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $('#btnTambahPasien').on('click', function(e) {
+            $.ajax({
+                url: "{{ route('admin.tambah-pasien') }}",
+                type: 'GET',
+                method: 'GET',
+                processData: false,
+                contentType: false,
+                dataType: 'json', // added data type
+                statusCode: {
+                    403: (res) => {
+                        var response = res.responseJSON
+                        Swal.fire({
+                            title: "error",
+                            html: `<strong>${response.message}</strong>`,
+                            icon: "error",
+                        })
+
+                    },
+                    200: (res) => {
+                        window.location.href = "http://127.0.0.1:8000/d/tambah-pasien"
+                    }
+                },
+                success: function(res) {
+                    console.log(res);
+                    alert(res);
+                }
+            });
+
+        })
+    </script>
+@endpush

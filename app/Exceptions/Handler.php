@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class Handler extends ExceptionHandler
 {
@@ -15,6 +16,20 @@ class Handler extends ExceptionHandler
     protected $levels = [
         //
     ];
+    public function render($request, $exception)
+    {
+        if ($exception instanceof AuthorizationException) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Kamu tidak ada akses untuk ini!'
+                ], 403);
+            }
+            // // return redirect()->back();
+            // abort(404);
+        }
+        return parent::render($request, $exception);
+    }
 
     /**
      * A list of the exception types that are not reported.
@@ -44,7 +59,10 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            // if ($e instanceof AuthorizationException) {
+            //     abort(404);
+            //     return back();
+            // }
         });
     }
 }

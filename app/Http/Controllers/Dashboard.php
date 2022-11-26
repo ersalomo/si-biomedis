@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{
     RegistrasiPasien as Pasien,
-    AnamnesaPasien
+    AnamnesaPasien,
+    ObatModel
 };
 
 class Dashboard extends Controller
@@ -15,6 +16,7 @@ class Dashboard extends Controller
         return view('content.admin.index', [
             'pasiens' => Pasien::all()->count(),
             'anamnesa' => AnamnesaPasien::all()->count(),
+            'drugs' => ObatModel::all()->count(),
         ]);
     }
 }

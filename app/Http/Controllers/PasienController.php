@@ -16,10 +16,14 @@ class PasienController extends Controller
     }
     public function tambahPasien()
     {
+        $this->authorize('notForDocter');
+
         return view('content.admin.home.tambah-pasien');
     }
     public function store(RequestPasien $req)
     {
+        $this->authorize('notForDocter');
+
         $validator =  Validator::make($req->all(), $req->rules());
         if ($validator->fails()) {
             return response()->json([

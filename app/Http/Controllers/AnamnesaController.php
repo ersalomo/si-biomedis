@@ -18,6 +18,7 @@ class AnamnesaController extends Controller
 
     public function tambahAnamnesa(Pasien $pasien)
     {
+        $this->authorize('notForAdmin');
         $name = '';
         if ($pasien) $name = $pasien;
         return view('content.admin.home.tambah-anamnesa', [
@@ -28,6 +29,7 @@ class AnamnesaController extends Controller
 
     public function create(RequestAnamnesa $req)
     {
+        $this->authorize('notForAdmin');
         Anamnesa::create($req->all());
         Alert::success('Berhasil ditambahkan', 'database');
         return back();

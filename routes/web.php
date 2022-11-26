@@ -6,7 +6,8 @@ use App\Http\Controllers\{
     AnamnesaController,
     AuthController,
     Dashboard,
-    AdminProfileController
+    AdminProfileController,
+    ObatController
 };
 
 
@@ -31,19 +32,20 @@ Route::group([
     'as' => 'admin.',
 ], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('dashboard', [Dashboard::class, 'index'])->name('home');
 
+    Route::get('dashboard', [Dashboard::class, 'index'])->name('home');
     Route::controller(PasienController::class)->group(function () {
         Route::get('show-data-pasien', 'showDataPasien')->name('data-pasien');
         Route::get('tambah-pasien', 'tambahPasien')->name('tambah-pasien');
-        Route::post('create-pasien', 'store')->name('create-pasien');
+        Route::post('create-pasien', 'store')->name('create-pasien'); // tidak boleh, dokter hanya bisa dilakukan oleh admin ke aatas
     });
 
     Route::controller(AnamnesaController::class)->group(function () {
         Route::get('show-data-anamnesa', 'showDataAnamnesa')->name('data-anamnesa');
         Route::get('tambah-anamnesa/{pasien:uuid?}', 'tambahAnamnesa')->name('tambah-anamnesa');
-        Route::post('tambah', 'create')->name('create-anamnesa');
+        Route::post('tambah', 'create')->name('create-anamnesa');  //tidak boleh ,admin hanya melihat data anamnesa
     });
 
     Route::get('my-profile', [AdminProfileController::class, 'profile'])->name('my-profile');
+    Route::resource('obat', ObatController::class);
 });

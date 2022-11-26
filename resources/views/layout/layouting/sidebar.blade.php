@@ -19,9 +19,12 @@
                             <li><a href="{{ route('admin.tambah-pasien') }}"
                                     class="{{ request()->is('d/tambah-pasien') ? 'active' : '' }}">Tambah pasien</a>
                             </li>
-                            <li><a href="{{ route('admin.tambah-anamnesa') }}"
-                                    class="{{ request()->is('d/tambah-anamnesa') ? 'active' : '' }}">Tambah Anamnesa</a>
-                            </li>
+                            @if (auth()->user()->role == 90)
+                                <li><a href="{{ route('admin.tambah-anamnesa') }}"
+                                        class="{{ request()->is('d/tambah-anamnesa') ? 'active' : '' }}">Tambah
+                                        Anamnesa</a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                     <li class="submenu">
@@ -39,6 +42,20 @@
                                     class="{{ request()->is('d/show-data-anamnesa') ? 'active' : '' }}">Data Anamnesa
                                 </a>
                             </li>
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                        <a href="javascript:void(0);" class="">
+                            <img src="{{ asset('assets/img/icons/medkit.svg') }}" alt="img">
+                            <span>Persediaan Obat</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul style="display: none;">
+                            <li>
+                                <a href="{{ route('admin.obat.index') }}/#"
+                                    class="{{ request()->is('d/show-data-pasien') ? 'active' : '' }}">Data Obat</a>
+                            </li>
+
                         </ul>
                     </li>
                 </ul>
