@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('uuid');
             $table->primary('uuid');
             $table->string('nama', 50);
+            $table->string('jenis_pasien', 100);
             $table->string('tanggal_lahir');
             $table->integer('umur');
             $table->enum('jenis_kelamin', ['pria', 'wanita']);

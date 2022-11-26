@@ -24,6 +24,14 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
+                                <label>Jenis Pasien</label>
+                                <input name="jenis_pasien" value="{{ old('jenis_pasien') }}" type="text"
+                                    class="form-control text-dark" placeholder="jenis pasien">
+                                <span class="text-danger error-text jenis_pasien_error"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
                                 <label>Tanggal lahir</label>
                                 <input name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" type="date"
                                     class="form-control">

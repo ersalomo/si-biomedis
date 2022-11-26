@@ -36,6 +36,7 @@ Route::group([
         Route::get('show-data-pasien', 'showDataPasien')->name('data-pasien');
         Route::get('tambah-pasien', 'tambahPasien')->name('tambah-pasien');
         Route::post('create-pasien', 'store')->name('create-pasien'); // tidak boleh, dokter hanya bisa dilakukan oleh admin ke aatas
+        Route::delete('delete-pasien/{pasien?}', 'delete')->name('delete-pasien'); // tidak boleh, dokter hanya bisa dilakukan oleh admin ke aatas
     });
 
     Route::controller(AnamnesaController::class)->group(function () {

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\{Request, JsonResponse};
 use App\Models\ObatModel;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\{Validator, Response};
+use Illuminate\Http\{
+    Request,
+    JsonResponse
+};
 
 class ObatController extends Controller
 {
@@ -53,13 +55,7 @@ class ObatController extends Controller
                 'errors' => $validator->errors()->toArray(),
             ], 422);
         } else {
-            // $data_obat = new ObatModel();
-            // $data_obat->nama_obat = $request->nama_obat;
-            // $data_obat->jenis_obat = $request->jenis_obat;
-            // $data_obat->jumlah_obat = $request->jumlah_obat;
-            // $data_obat->satuan_obat = $request->satuan_obat;
-            // $data_obat->desc = $request->desc;
-            // $save = $data_obat->save();
+
             $save = ObatModel::create($request->all());
             if ($save) {
                 return response()->json([
@@ -109,7 +105,13 @@ class ObatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data_obat = ObatModel::findOrFail($id);
+        $data_obat->nama_obat = $request->nama_obat;
+        $data_obat->jenis_obat = $request->jenis_obat;
+        $data_obat->jumlah_obat = $request->jumlah_obat;
+        $data_obat->satuan_obat = $request->satuan_obat;
+        $data_obat->desc = $request->desc;
+        $save = $data_obat->save();
     }
 
     /**
@@ -118,8 +120,8 @@ class ObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ObatModel $obat): JsonResponse
     {
-        //
+        return response()->json([]);
     }
 }

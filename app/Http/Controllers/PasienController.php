@@ -41,4 +41,14 @@ class PasienController extends Controller
             }
         }
     }
+    public function delete(Pasien $pasien)
+    {
+        $pasien->delete();
+        return response()->json(array(
+            'success' => true,
+            'title' => 'Delete data pasien',
+            'icon' => 'warning',
+            'message' => 'Berhasil menghapus data pasien!'
+        ), 200);
+    }
 }

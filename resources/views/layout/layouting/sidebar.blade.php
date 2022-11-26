@@ -16,10 +16,13 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul>
-                            <li><a href="{{ route('admin.tambah-pasien') }}"
-                                    class="{{ request()->is('d/tambah-pasien') ? 'active' : '' }}">Tambah pasien</a>
-                            </li>
-                            @if (auth()->user()->role == 90)
+                            @if (auth()->user()->role != 3)
+                                <li><a href="{{ route('admin.tambah-pasien') }}"
+                                        class="{{ request()->is('d/tambah-pasien') ? 'active' : '' }}">Tambah pasien</a>
+                                </li>
+                            @endif
+
+                            @if (!auth()->user()->role == 2)
                                 <li><a href="{{ route('admin.tambah-anamnesa') }}"
                                         class="{{ request()->is('d/tambah-anamnesa') ? 'active' : '' }}">Tambah
                                         Anamnesa</a>
@@ -53,7 +56,7 @@
                         <ul style="display: none;">
                             <li>
                                 <a href="{{ route('admin.obat.index') }}/#"
-                                    class="{{ request()->is('d/show-data-pasien') ? 'active' : '' }}">Data Obat</a>
+                                    class="{{ request()->is('d/obat') ? 'active' : '' }}">Data Obat</a>
                             </li>
 
                         </ul>
