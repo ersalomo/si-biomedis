@@ -6,6 +6,7 @@ use App\Models\AnamnesaPasien as Anamnesa;
 use App\Models\RegistrasiPasien as Pasien;
 use App\Http\Requests\RequestAnamnesa;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Http\Request;
 
 class AnamnesaController extends Controller
 {
@@ -26,12 +27,20 @@ class AnamnesaController extends Controller
         ]);
     }
 
-
     public function create(RequestAnamnesa $req)
     {
         $this->authorize('notForAdmin');
+        //  --- stok obat
         Anamnesa::create($req->all());
         Alert::success('Berhasil ditambahkan', 'database');
         return back();
     }
+    // public function create(Request $req)
+    // {
+    //     dd($req->id_obat);
+    //     // $this->authorize('notForAdmin');
+    //     // Anamnesa::create($req->all());
+    //     // Alert::success('Berhasil ditambahkan', 'database');
+    //     // return back();
+    // }
 }

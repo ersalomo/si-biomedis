@@ -176,10 +176,10 @@
                             icon: "success",
                             confirmButtonText: 'Yep!',
                             allowOutsideClick: false
-
                         }).then((res) => {
                             if (res.isConfirmed) {
                                 $('#modal-obat').modal('hide');
+                                window.location.href = "http://127.0.0.1:8000/d/obat/"
                             }
                         });
                     },

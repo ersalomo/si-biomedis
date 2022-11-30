@@ -21,8 +21,7 @@
                                         class="{{ request()->is('d/tambah-pasien') ? 'active' : '' }}">Tambah pasien</a>
                                 </li>
                             @endif
-
-                            @if (!auth()->user()->role == 2)
+                            @if (auth()->user()->role != 2)
                                 <li><a href="{{ route('admin.tambah-anamnesa') }}"
                                         class="{{ request()->is('d/tambah-anamnesa') ? 'active' : '' }}">Tambah
                                         Anamnesa</a>

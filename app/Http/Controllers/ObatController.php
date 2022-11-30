@@ -74,6 +74,25 @@ class ObatController extends Controller
         }
     }
 
+    public function getDrugs(Request $request)
+    {
+        $search = $request->search;
+        if ($search == '') {
+            $drugs = ObatModel::orderBy('nama_obat', 'ASC')->limit(5)->get();
+        } else {
+            $drugs = ObatModel::orderBy('nama_obat', 'ASC')->where('nama_obat', 'like', '%' . $search . '%')
+                ->limit(5)->get();
+        }
+        // $response = array();
+        // foreach ($drugs as $drug) {
+        //     $response[] = array(
+        //         "id" => $drug->id,
+        //         "text" => $drug->name
+        //     );
+        // }
+        return response()->json($drugs);
+    }
+
     /**
      * Display the specified resource.
      *

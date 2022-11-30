@@ -37,6 +37,8 @@ Route::group([
         Route::get('tambah-pasien', 'tambahPasien')->name('tambah-pasien');
         Route::post('create-pasien', 'store')->name('create-pasien'); // tidak boleh, dokter hanya bisa dilakukan oleh admin ke aatas
         Route::delete('delete-pasien/{pasien?}', 'delete')->name('delete-pasien'); // tidak boleh, dokter hanya bisa dilakukan oleh admin ke aatas
+        Route::get('confirmation-delete/{id}', 'confirmationDelete')->name('confirmation-delete'); // tidak boleh, dokter hanya bisa dilakukan oleh admin ke aatas
+        Route::get('get-pasiens', 'getDataPasiens')->name('get-patiens');
     });
 
     Route::controller(AnamnesaController::class)->group(function () {
@@ -47,4 +49,5 @@ Route::group([
 
     Route::get('my-profile', [AdminProfileController::class, 'profile'])->name('my-profile');
     Route::resource('obat', ObatController::class);
+    Route::get('get-drugs', [ObatController::class, 'getDrugs'])->name('getDrugs');
 });

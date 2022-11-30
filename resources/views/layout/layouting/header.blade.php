@@ -5,7 +5,7 @@
             <h1>Klinik-ku</h1>
         </a>
         <a href="#" class="logo-small">
-            <img src="{{ asset('assets/img/logo-small.png') }}" alt="">
+            {{--  <img src="{{ asset('assets/img/logo-small.png') }}" alt="">  --}}
         </a>
         <a id="toggle_btn" href="javascript:void(0);">
         </a>

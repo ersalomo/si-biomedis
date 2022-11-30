@@ -27,23 +27,25 @@ class RequestPasien extends FormRequest
         return [
             '*'             => ['required'],
             'nama'          => ['string'],
-            'tanggal_lahir' => [],
-            'umur'          => ['integer', 'between:10,80'],
+            'jenis_pasien'  => ['string'],
+            // 'tanggal_lahir' => [],
+            'umur'          => ['integer'],
             'jenis_kelamin' => ['in:pria,wanita'],
-            'tanggal_lahir' => ['before:11/30/2022'],
+            'tanggal_lahir' => ['before:12/30/2022'],
             'alamat'        => ['string'],
-            'pekerjaan'     => ['string']
+            'pekerjaan'     => ['nullable']
         ];
     }
     public function messages()
     {
         return array(
             '*.required' => 'Kolom ini harus diisi',
+            'jenis_pasien.string' => 'Tidak sesuai dengan kriteria',
             'jenis_kelamin.in' => 'Masukkan nilai yang sesuai',
             'tanggal_lahir.before' => 'Minimal satu tahun',
             'umur.between' => 'Nilai ini tidak sesuai',
             'alamat.string' => 'Hanya menerima alphanumeric',
-            'pekerjaan.string' => 'Tidak boleh memasukkan karakter khusus'
+            // 'pekerjaan.string' => 'Tidak boleh memasukkan karakter khusus'
         );
     }
 }

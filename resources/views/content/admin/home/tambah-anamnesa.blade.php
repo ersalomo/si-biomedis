@@ -28,7 +28,7 @@
                                     class="form-control @error('anamnesa')
                                     is-invalid
                                 @enderror"
-                                    style="height: 120px;"></textarea>
+                                    style="height: 60px;"></textarea>
                                 @error('anamnesa')
                                     <span class="text-danger">
                                         {{ $message }}
@@ -43,7 +43,7 @@
                                     class="form-control @error('diagnosa')
                                 is-invalid
                             @enderror"
-                                    style="height: 120px;"></textarea>
+                                    style="height: 60px;"></textarea>
                                 @error('diagnosa')
                                     <span class="text-danger">
                                         {{ $message }}
@@ -53,12 +53,31 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
+                                <label>Obat Yang Dipakai</label>
+                                <select id='sel_emp' name="id_obat"
+                                    class="form-control @error('id_obat')
+                                is-invalid
+                            @enderror"
+                                    value="{{ old('id_obat') }}">
+                                    <option value='0'>-- Select nama obat --</option>
+                                </select>
+                            </div>
+                            @error('id_obat')
+                                <span class="text-danger">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+
+
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
                                 <label>Pengobatan</label>
                                 <textarea name="pengobatan"
                                     class="form-control @error('pengobatan')
                                 is-invalid
                             @enderror"
-                                    style="height: 120px;"></textarea>
+                                    style="height: 60px;"></textarea>
                                 @error('pengobatan')
                                     <span class="text-danger">
                                         {{ $message }}
@@ -78,4 +97,25 @@
     </div>
 @endsection
 @push('scripts')
+    <script>
+        $('#sel_emp').select2({
+            ajax: {
+                url: "{{ route('admin.getDrugs') }}",
+                method: 'get',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(response) {
+                    return {
+                        results: $.map(response, function(data) {
+                            return {
+                                id: data.id,
+                                text: data.nama_obat
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    </script>
 @endpush

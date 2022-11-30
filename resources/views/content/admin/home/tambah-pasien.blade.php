@@ -25,8 +25,11 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Jenis Pasien</label>
-                                <input name="jenis_pasien" value="{{ old('jenis_pasien') }}" type="text"
-                                    class="form-control text-dark" placeholder="jenis pasien">
+                                <select class="form-control" value="{{ old('jenis_pasien') }}" name="jenis_pasien">
+                                    <option value="" class="">Pilih</option>
+                                    <option value="umum">Pasien Umum</option>
+                                    <option value="bpjs">Pasien BPJS</option>
+                                </select>
                                 <span class="text-danger error-text jenis_pasien_error"></span>
                             </div>
                         </div>
@@ -60,7 +63,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Alamat</label>
-                                <textarea name="alamat" value="{{ old('alamat') }}" class="form-control" style="height: 150px;"></textarea>
+                                <textarea name="alamat" value="{{ old('alamat') }}" class="form-control" style="height: 60px;"></textarea>
                                 <span class="text-danger error-text  alamat_error"></span>
                             </div>
                         </div>
