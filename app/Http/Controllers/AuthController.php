@@ -13,13 +13,14 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
-    
+
     public function login(AuthRequest $req)
     {
         $user =  $req->only(['email', 'password']);
         if (Auth::guard()->attempt($user)) {
             return to_route('admin.home');
         }
+        return back()->with('error', 'This credentials does not match to our records');
     }
 
     public function logout(Request $req)

@@ -57,14 +57,13 @@
                                         <td>{{ $drug->satuan }}</td>
                                         <td>{{ $drug->desc }}</td>
                                         <td>
-                                            <a class="me-3" href="">
+                                            <a class="me-3" href="javascript:void(0);" data-item="{{ $drug->id }}"
+                                                data-url="{{ url('d/obat/' . $drug->id) }}" onclick="deleteObat(this)">
                                                 <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3" href="">
+                                            <a class="me-3" href="javascript:void(0);" data-item="{{ $drug->id }}"
+                                                onclick="editObat(this)">
                                                 <img src="{{ asset('assets/img/icons/edit.svg') }}" palt="img">
-                                            </a>
-                                            <a class="me-3" href="{{ url('d/tambah-anamnesa/' . $drug->id) }}">
-                                                <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img">
                                             </a>
 
                                         </td>
@@ -149,6 +148,47 @@
 @endsection
 @push('scripts')
     <script>
+        const deleteObat = (button) => {
+            const url = button.getAttribute('data-url')
+            swal.fire({
+                title: "Hapus data?",
+                imageWidth: 60,
+                imageHeight: 48,
+                html: "Apakah kamu yakin ingin menghapus data?",
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Yes, delete',
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
+                width: 350,
+                allowOutsideClick: false
+            }).then(function(result) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        method: "delete",
+                        dataType: 'json',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: (res) => {
+                            Swal.fire({
+                                title: res.title,
+                                icon: res.icon,
+                                text: res.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function(res) {
+                                window.location.reload();
+                            })
+                        },
+                    })
+                }
+            });
+        }
+    </script>
+    <script>
         $(function() {
             $("#form-obat").on("submit", (e) => {
                 e.preventDefault();
@@ -195,6 +235,7 @@
                 e.stopPropagation();
                 $('#form-pasien').find("span.error-text").text("");
             })
+
         });
     </script>
 @endpush

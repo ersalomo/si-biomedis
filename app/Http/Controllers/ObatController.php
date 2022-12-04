@@ -141,6 +141,11 @@ class ObatController extends Controller
      */
     public function destroy(ObatModel $obat): JsonResponse
     {
-        return response()->json([]);
+        return response()->json(array(
+            'success' => true,
+            'title' => 'Delete data Obat',
+            'icon' => 'success',
+            'message' => 'Berhasil menghapus data obat!'
+        ), 200);
     }
 }

@@ -60,72 +60,15 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Kunjungan Pasien Bulanan</div>
+                        <div class="card-title">{{ $chart1->options['chart_title'] }}</div>
                     </div>
-                    <div class="card-body  chart-set">
-                        <div class="h-250" id="flotBar1" style="padding: 0px; position: relative;"><canvas
-                                class="flot-base" width="471" height="250"
-                                style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 471.5px; height: 250px;"></canvas>
-                            <div class="flot-text"
-                                style="position: absolute; inset: 0px; font-size: smaller; color: rgb(84, 84, 84);">
-                                <div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; inset: 0px;">
-                                    <div
-                                        style="position: absolute; max-width: 42px; top: 237px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 15px; text-align: center;">
-                                        0</div>
-                                    <div
-                                        style="position: absolute; max-width: 42px; top: 237px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 63px; text-align: center;">
-                                        1</div>
-                                    <div
-                                        style="position: absolute; max-width: 42px; top: 237px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 110px; text-align: center;">
-                                        2</div>
-                                    <div
-                                        style="position: absolute; max-width: 42px; top: 237px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 157px; text-align: center;">
-                                        3</div>
-                                    <div
-                                        style="position: absolute; max-width: 42px; top: 237px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 205px; text-align: center;">
-                                        4</div>
-                                    <div
-                                        style="position: absolute; max-width: 42px; top: 237px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 252px; text-align: center;">
-                                        5</div>
-                                    <div
-                                        style="position: absolute; max-width: 42px; top: 237px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 300px; text-align: center;">
-                                        6</div>
-                                    <div
-                                        style="position: absolute; max-width: 42px; top: 237px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 347px; text-align: center;">
-                                        7</div>
-                                    <div
-                                        style="position: absolute; max-width: 42px; top: 237px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 394px; text-align: center;">
-                                        8</div>
-                                    <div
-                                        style="position: absolute; max-width: 42px; top: 237px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 442px; text-align: center;">
-                                        9</div>
-                                </div>
-                                <div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; inset: 0px;">
-                                    <div
-                                        style="position: absolute; top: 226px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 7px; text-align: right;">
-                                        0</div>
-                                    <div
-                                        style="position: absolute; top: 181px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 1px; text-align: right;">
-                                        10</div>
-                                    <div
-                                        style="position: absolute; top: 136px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 1px; text-align: right;">
-                                        20</div>
-                                    <div
-                                        style="position: absolute; top: 92px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 1px; text-align: right;">
-                                        30</div>
-                                    <div
-                                        style="position: absolute; top: 47px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 1px; text-align: right;">
-                                        40</div>
-                                    <div
-                                        style="position: absolute; top: 2px; font: 400 10px / 12px nunito, sans-serif; color: rgb(142, 156, 173); left: 1px; text-align: right;">
-                                        50</div>
-                                </div>
-                            </div><canvas class="flot-overlay" width="471" height="250"
-                                style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 471.5px; height: 250px;"></canvas>
-                        </div>
+                    <div class="card-body">
+                        {!! $chart1->renderHtml() !!}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {!! $chart1->renderChartJsLibrary() !!}
+    {!! $chart1->renderJs() !!}
 @endsection

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
 .css-equal-content,
 .css-equal-heights {
     display: flex;
@@ -586,9 +587,9 @@ h6 {
     }
 }
 body {
-    font-family: nunito, sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 14px;
-    color: #212b36;
+    color: #121213;
     line-height: 1.5;
     background-color: #fafbfe;
 }
