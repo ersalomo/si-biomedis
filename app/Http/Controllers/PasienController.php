@@ -13,9 +13,7 @@ class PasienController extends Controller
 {
     public function showDataPasien()
     {
-        return view('content.admin.home.data-pasien', [
-            // 'pasiens' => Pasien::get()
-        ]);
+        return view('author.content.pasien.data-pasien', []);
     }
     public function getDataPasiens()
     {
@@ -27,13 +25,13 @@ class PasienController extends Controller
                 }
             })
             ->addColumn('action', function ($data) {
-                $url_edit = url('d/edit/' . $data->uuid);
-                $url_hapus = url('d/delete-pasien/' . $data->uuid); //href="' . $url_hapus . '"
-                $tdPasien = '<a href="' . $url_edit . '" class=""><img src="' . asset('assets/img/icons/edit.svg') . '" palt="img"></a>';
-                $tdPasien .= '<button class="btn" onclick="deletePasien(this);" data-item="' . $data->uuid . '"><img src="' . asset("assets/img/icons/delete.svg") . '" alt="img"></button>';
+                $url_edit = url('author/edit/' . $data->uuid);
+                $url_hapus = url('author/delete-pasien/' . $data->uuid); //href="' . $url_hapus . '"
+                $tdPasien = '<a href="' . $url_edit . '" class=""><i class="fa fa-pen"></i></a>';
+                $tdPasien .= '<button class="btn" onclick="deletePasien(this);" data-item="' . $data->uuid . '"><i class="fa fa-trash"></i></button>';
                 if (auth()->user()->role != 2) {
-                    $tdPasien .=  '<a class="me-3" href="' . url('d/tambah-anamnesa/' . $data->uuid) . '">';
-                    $tdPasien .=    '<img src="' . asset('assets/img/icons/plus.svg') . '" alt="img"></a>';
+                    $tdPasien .=  '<a class="me-3" href="' . url('author/tambah-anamnesa/' . $data->uuid) . '">';
+                    $tdPasien .=    '<i class="fa fa-plus"></i></a>';
                 }
                 return $tdPasien;
             })
@@ -45,7 +43,8 @@ class PasienController extends Controller
     {
         $this->authorize('notForDocter');
 
-        return view('content.admin.home.tambah-pasien');
+        // return view('content.admin.home.tambah-pasien');
+        return view('author.content.pasien.add-pasien');
     }
     public function store(RequestPasien $req)
     {

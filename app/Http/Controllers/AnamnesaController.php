@@ -12,9 +12,12 @@ class AnamnesaController extends Controller
 {
     public function showDataAnamnesa()
     {
-        return view('content.admin.home.data-anamnesa', [
+        return view('author.content.anamnesa.data-anamnesa', [
             'anamnesas' => Anamnesa::get(),
         ]);
+        // return view('content.admin.home.data-anamnesa', [
+        //     'anamnesas' => Anamnesa::get(),
+        // ]);
     }
 
     public function tambahAnamnesa(Pasien $pasien)
@@ -22,7 +25,10 @@ class AnamnesaController extends Controller
         $this->authorize('notForAdmin');
         $name = '';
         if ($pasien) $name = $pasien;
-        return view('content.admin.home.tambah-anamnesa', [
+        // return view('content.admin.home.tambah-anamnesa', [
+        //     'name' => $name
+        // ]);
+        return view('author.content.anamnesa.add-anamnesa', [
             'name' => $name
         ]);
     }
@@ -35,12 +41,4 @@ class AnamnesaController extends Controller
         Alert::success('Berhasil ditambahkan', 'database');
         return back();
     }
-    // public function create(Request $req)
-    // {
-    //     dd($req->id_obat);
-    //     // $this->authorize('notForAdmin');
-    //     // Anamnesa::create($req->all());
-    //     // Alert::success('Berhasil ditambahkan', 'database');
-    //     // return back();
-    // }
 }

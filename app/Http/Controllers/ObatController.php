@@ -18,9 +18,12 @@ class ObatController extends Controller
      */
     public function index()
     {
-        return view('content.admin.home.obat.data-obat', [
+        return view('author.content.obat.data-obat', [
             'drugs' => ObatModel::get(),
         ]);
+        // return view('content.admin.home.obat.data-obat', [
+        //     'drugs' => ObatModel::get(),
+        // ]);
     }
 
     /**

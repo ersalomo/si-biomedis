@@ -1,9 +1,8 @@
-<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/css-extended.css') }}">
+<link rel="stylesheet" href="/dist/assets/css/main/app.css">
+<link rel="stylesheet" href="/dist/assets/css/main/app-dark.css">
+<link rel="shortcut icon" href="/dist/assets/images/logo/favicon.svg" type="image/x-icon">
+<link rel="shortcut icon" href="/dist/assets/images/logo/favicon.png" type="image/png">
+<link rel="stylesheet" href="/dist/assets/css/shared/iconly.css">
+<link rel="stylesheet" href="/dist/assets/css/pages/fontawesome.css">
+<link rel="stylesheet" href="/dist/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="/dist/assets/css/pages/datatables.css">
