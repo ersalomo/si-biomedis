@@ -10,7 +10,7 @@
     <div class="content">
         <div class="page-btn">
             <a href="#" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#modal-obat">
-                <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img" class="me-1">Add New Drugs
+                <i class="iconly-boldPlus"></i> Tambah baru
             </a>
         </div>
         <div class="card">
@@ -20,8 +20,8 @@
                         <table class="table" id="" role="grid" aria-describedby="">
                             <thead>
                                 <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
-                                        colspan="1" aria-sort="ascending" aria-label="" style="width: 38.5938px;">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="" rowspan="1" colspan="1"
+                                        aria-sort="ascending" aria-label="" style="width: 38.5938px;">
                                         <label class="checkboxs">
                                             <input type="checkbox" id="select-all">
                                             <span class="checkmarks"></span>
@@ -53,7 +53,8 @@
                                         <td>{{ $drug->desc }}</td>
                                         <td>
                                             <a class="me-3" href="javascript:void(0);" data-item="{{ $drug->id }}"
-                                                data-url="{{ url('d/obat/' . $drug->id) }}" onclick="deleteObat(this)">
+                                                data-url="{{ url('author/obat/' . $drug->id) }}"
+                                                data-name="{{ $drug->nama_obat }}" onclick="deleteObat(this)">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                             <a class="me-3" href="javascript:void(0);" data-item="{{ $drug->id }}"
@@ -80,7 +81,7 @@
                     <h5 class="modal-title">Add New Drugs</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-black">
                     <form method="post" action="{{ route('author.obat.store') }}" id="form-obat" class="">
                         @csrf
                         <div class="row">
@@ -88,7 +89,7 @@
                                 <div class="form-group">
                                     <label>Nama Obat</label>
                                     <input name="nama_obat" value="{{ old('nama_obat') }}" type="text"
-                                        class="form-control text-dark" placeholder="enter nama obat">
+                                        class="form-control text" placeholder="enter nama obat">
                                     <span class="text-danger error-text nama_obat_error"></span>
                                 </div>
                             </div>
@@ -104,7 +105,7 @@
                                 <div class="form-group">
                                     <label>Jumlah Stok</label>
                                     <input id="umur" name="jumlah_stok" value="{{ old('jumlah_stok') }}"
-                                        type="number" class="form-control text-dark" placeholder="enter jumlah stok">
+                                        type="number" class="form-control text" placeholder="enter jumlah stok">
                                     <span class="text-danger error-text jumlah_stok_error"></span>
                                 </div>
                             </div>
@@ -126,7 +127,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Keterangan</label>
-                                    <textarea name="desc" class="text-dark" value="{{ old('desc') }}" style="height: 120px;"></textarea>
+                                    <textarea name="desc" class="text form-control" value="{{ old('desc') }}" style="height: 60px;"></textarea>
                                     <span class="text-danger error-text desc_error"></span>
                                 </div>
                             </div>
@@ -145,11 +146,12 @@
     <script>
         const deleteObat = (button) => {
             const url = button.getAttribute('data-url')
+            const name = button.getAttribute('data-name')
             swal.fire({
                 title: "Hapus data?",
                 imageWidth: 60,
                 imageHeight: 48,
-                html: "Apakah kamu yakin ingin menghapus data?",
+                html: `Apakah kamu yakin ingin menghapus data <b>${name}</b>?`,
                 showCloseButton: true,
                 showCancelButton: true,
                 cancelButtonText: 'Cancel',
@@ -164,19 +166,23 @@
                         url: url,
                         method: "delete",
                         dataType: 'json',
+                        processData: false,
+                        contentType: false,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: (res) => {
-                            Swal.fire({
-                                title: res.title,
-                                icon: res.icon,
-                                text: res.message,
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(function(res) {
-                                window.location.reload();
-                            })
+                            Toastify({
+                                avatar: '/dist/assets/images/icon/warning.png',
+                                text: `Data obat ${name} deleted successfully`,
+                                duration: 2500,
+                                close: true,
+                                gravity: "top",
+                                position: "center",
+                                backgroundColor: "#f59f00",
+                                callback: () => window.location.reload(),
+                            }).showToast()
+
                         },
                     })
                 }
@@ -205,18 +211,17 @@
                     },
                     success: (data) => {
                         $("#form-obat")[0].reset();
-                        Swal.fire({
-                            title: data.title,
-                            text: data.message,
-                            icon: "success",
-                            confirmButtonText: 'Yep!',
-                            allowOutsideClick: false
-                        }).then((res) => {
-                            if (res.isConfirmed) {
-                                $('#modal-obat').modal('hide');
-                                window.location.href = "http://127.0.0.1:8000/d/obat/"
-                            }
-                        });
+                        Toastify({
+                            // avatar: 'https://cdn-icons-png.flaticon.com/512/3020/3020000.png',
+                            avatar: '/dist/assets/images/icon/sucess.png',
+                            text: `Data obat ${name} created successfully`,
+                            duration: 2500,
+                            close: true,
+                            gravity: "top",
+                            position: "center",
+                            backgroundColor: "#2fb344",
+                            selector: $('#modal-obat').modal('hide'),
+                        }).showToast();
                     },
                     error: (data) => {
                         $.each(data.responseJSON.errors, (prefix, val) => {

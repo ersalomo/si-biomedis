@@ -10,7 +10,7 @@ class AdminProfileController extends Controller
     public function profile(Request $req)
     {
         $data_user = Auth::user();
-        return view('content.admin.profile-admin.profile', [
+        return view('author.content.profile.profile-me', [
             'data_user' => $data_user,
         ]);
     }

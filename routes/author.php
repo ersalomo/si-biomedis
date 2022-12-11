@@ -27,6 +27,7 @@ Route::prefix('author')
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
         Route::get('dashboard', [DashboardController::class, 'index']);
+        Route::get('visit-pasiens', [DashboardController::class, 'getVisitAllPasien'])->name('visit-pasiens');
         Route::controller(PasienController::class)->group(function () {
             Route::get('show-data-pasien', 'showDataPasien')->name('data-pasien');
             Route::get('tambah-pasien', 'tambahPasien')->name('tambah-pasien');

@@ -18,7 +18,7 @@ class AuthController extends Controller
     {
         $user =  $req->only(['email', 'password']);
         if (Auth::guard()->attempt($user)) {
-            return to_route('admin.home');
+            return to_route('author.');
         }
         return back()->with('error', 'This credentials does not match to our records');
     }

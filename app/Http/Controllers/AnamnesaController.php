@@ -15,9 +15,6 @@ class AnamnesaController extends Controller
         return view('author.content.anamnesa.data-anamnesa', [
             'anamnesas' => Anamnesa::get(),
         ]);
-        // return view('content.admin.home.data-anamnesa', [
-        //     'anamnesas' => Anamnesa::get(),
-        // ]);
     }
 
     public function tambahAnamnesa(Pasien $pasien)
@@ -25,9 +22,6 @@ class AnamnesaController extends Controller
         $this->authorize('notForAdmin');
         $name = '';
         if ($pasien) $name = $pasien;
-        // return view('content.admin.home.tambah-anamnesa', [
-        //     'name' => $name
-        // ]);
         return view('author.content.anamnesa.add-anamnesa', [
             'name' => $name
         ]);
@@ -38,7 +32,6 @@ class AnamnesaController extends Controller
         $this->authorize('notForAdmin');
         //  --- stok obat
         Anamnesa::create($req->all());
-        Alert::success('Berhasil ditambahkan', 'database');
         return back();
     }
 }

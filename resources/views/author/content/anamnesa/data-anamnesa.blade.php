@@ -82,7 +82,7 @@
                         })
                     },
                     200: (res) => {
-                        window.location.href = "http://127.0.0.1:8000/d/tambah-anamnesa"
+                        window.location.href = "http://127.0.0.1:8000/author/tambah-anamnesa"
                     }
                 },
                 success: function(res) {

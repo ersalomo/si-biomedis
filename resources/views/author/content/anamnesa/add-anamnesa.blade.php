@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="content">
-        <div class="card">
+        <div class="card text-black">
             <div class="card-body">
                 <form method="post" action="{{ route('author.create-anamnesa') }}" id="form-anemnesa">
                     @csrf
@@ -15,14 +15,15 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Nama Pasien</label>
-                                <input type="text" class="form-control" placeholder="" value="{{ $name->nama ?? '' }}">
+                                <input type="text" class="form-control" placeholder="nama pasien"
+                                    value="{{ $name->nama ?? '' }}">
                                 <input type="hidden" name="uuid_pasien" value="{{ $name->uuid ?? '' }}" />
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Anamnesa</label>
-                                <textarea name="anamnesa"
+                                <textarea name="anamnesa" placeholder="anamnesa..."
                                     class="form-control @error('anamnesa')
                                     is-invalid
                                 @enderror"
@@ -37,7 +38,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Diagnosa</label>
-                                <textarea name="diagnosa"
+                                <textarea name="diagnosa" placeholder="diagnosa..."
                                     class="form-control @error('diagnosa')
                                 is-invalid
                             @enderror"
@@ -69,7 +70,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Pengobatan</label>
-                                <textarea name="pengobatan"
+                                <textarea name="pengobatan" placeholder="pengobatan..."
                                     class="form-control @error('pengobatan')
                                 is-invalid
                             @enderror"
@@ -82,8 +83,8 @@
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <button type="submit" class="btn btn-submit me-2">Submit</button>
-                            <button class="btn btn-cancel">Cancel</button>
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                            <button class="btn btn-outline-danger">Cancel</button>
                         </div>
                     </div>
                 </form>

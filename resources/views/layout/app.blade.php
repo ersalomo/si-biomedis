@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Dashboard - Admin Dashboard</title>
     @include('layout.styles-template.css-styles')
-
+    @vite([])
 </head>
 
 <body>
@@ -72,7 +73,11 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
+                        <p>
+
+                            2023
+                            &copy; Team
+                        </p>
                     </div>
                 </div>
             </footer>

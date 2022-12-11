@@ -15,11 +15,16 @@ $(function () {
                 },
                 success: (data) => {
                     $("#form-pasien")[0].reset();
-                    Swal.fire({
-                        title: data.title,
-                        text: data.msg,
-                        icon: "success",
-                    });
+                     Toastify({
+                            avatar: '/dist/assets/images/icon/sucess.png',
+                            text: `Data pasien created successfully`,
+                            duration: 2500,
+                            close: true,
+                            gravity: "top",
+                            position: "center",
+                            backgroundColor: "#2fb344",
+                            // selector: $('#modal-obat').modal('hide'),
+                        }).showToast();
                 },
                 error: (data) => {
                     $.each(data.responseJSON.errors, (prefix, val) => {

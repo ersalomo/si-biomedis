@@ -6,7 +6,7 @@
     </div>
 @endsection
 @section('content')
-    <div class="content">
+    <div class="content text-black">
         <div class="card">
             <div class="card-body">
                 <form method="post" action="{{ route('author.create-pasien') }}" id="form-pasien" class="">
@@ -15,8 +15,8 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Nama Pasien</label>
-                                <input name="nama" value="{{ old('nama') }}" type="text"
-                                    class="form-control text-dark" placeholder="enter name">
+                                <input name="nama" value="{{ old('nama') }}" type="text" class="form-control"
+                                    placeholder="enter name">
                                 <span class="text-danger error-text nama_error"></span>
                             </div>
                         </div>
@@ -68,13 +68,13 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Pekerjaan</label>
-                                <input name="pekerjaan" class="text-dark" value="{{ old('pekerjaan') }}" type="text">
+                                <textarea name="pekerjaan" value="{{ old('pekerjaan') }}" class="form-control" style="height: 60px;"></textarea>
                                 <span class="text-danger error-text pekerjaan_error"></span>
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <button type="submit" class="btn btn-submit me-2">Submit</button>
-                            <button class="btn btn-cancel">Cancel</button>
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                            <button class="btn btn-danger">Cancel</button>
                         </div>
                     </div>
                 </form>

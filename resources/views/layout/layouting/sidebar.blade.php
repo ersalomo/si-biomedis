@@ -11,9 +11,11 @@
             <li class="submenu-item {{ request()->is('author/show-data-pasien') ? 'active' : '' }}">
                 <a href="{{ route('author.data-pasien') }}" class="sidebar-link">Data Pasien</a>
             </li>
-            <li class="submenu-item {{ request()->is('author/tambah-pasien') ? 'active' : '' }}">
-                <a href="{{ route('author.tambah-pasien') }}">Tambah Pasien</a>
-            </li>
+            @if (auth()->user()->role != 3)
+                <li class="submenu-item {{ request()->is('author/tambah-pasien') ? 'active' : '' }}">
+                    <a href="{{ route('author.tambah-pasien') }}">Tambah Pasien</a>
+                </li>
+            @endif
         </ul>
         <ul class="submenu active">
             <li class="sidebar-title">Anamnesa</li>
@@ -21,9 +23,11 @@
             <li class="submenu-item {{ request()->is('author/show-data-anamnesa') ? 'active' : '' }}">
                 <a href="{{ route('author.data-anamnesa') }}">Data Anamnesa</a>
             </li>
-            <li class="submenu-item {{ request()->is('author/tambah-anamnesa') ? 'active' : '' }}">
-                <a href="{{ route('author.tambah-anamnesa') }}">Tambah Anamnesa</a>
-            </li>
+            @if (auth()->user()->role != 2)
+                <li class="submenu-item {{ request()->is('author/tambah-anamnesa') ? 'active' : '' }}">
+                    <a href="{{ route('author.tambah-anamnesa') }}">Tambah Anamnesa</a>
+                </li>
+            @endif
         </ul>
         <ul class="submenu active">
             <li class="sidebar-title">Data Obat</li>
