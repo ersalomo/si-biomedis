@@ -28,10 +28,10 @@ var optionsProfileVisit = {
 	},
 }
 $.getJSON('http://127.0.0.1:8000/author/visit-pasiens',  (data)=> {
-    const x = Object.values(data[0]).map((data)=>{
-        return data.length
+    const totalPatients = Object.values(data[0]).map((patient)=>{
+        return patient.length
     })
-    optionsProfileVisit.series[0].data = x
+    optionsProfileVisit.series[0].data = totalPatients
     var chartProfileVisit = new ApexCharts(document.querySelector("#chart-kunjungan-pasien"), optionsProfileVisit);
     chartProfileVisit.render();
 })
