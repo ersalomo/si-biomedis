@@ -27,21 +27,23 @@
                         <table class="table" id="" role="grid" aria-describedby="">
                             <thead>
                                 <tr role="row">
-                                    <th>Tanggal</th>
+                                    <th class="" style="width:130px;">Tanggal</th>
                                     <th>Name</th>
                                     <th>Anamnesa</th>
                                     <th>Diagnosa</th>
+                                    <th>Nama Obat</th>
                                     <th>Pengobatan</th>
-                                    <th>Action</th>
+                                    <th class="d-flex" style="width:130px;">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-black">
                                 @foreach ($anamnesas as $anamnesa)
                                     <tr class="even">
                                         <td>{{ $anamnesa->created_at }}</td>
                                         <td class="">{{ $anamnesa->pasien[0]->nama }}</td>
                                         <td>{{ $anamnesa->anamnesa }}</td>
                                         <td>{{ $anamnesa->diagnosa }} </td>
+                                        <td>{{ __($anamnesa->obat->nama_obat) }} </td>
                                         <td>{{ $anamnesa->pengobatan }}</td>
                                         <td>
                                             <a class="me-3" href="">

@@ -13,7 +13,9 @@
     <script src="/dist/assets/js/pages/datatables.js"></script> // tidak penting
 @endif
 <script src="/dist/assets/extensions/toastify-js/src/toastify.js"></script>
-@if (request()->is('author/show-data-pasien') or request()->is('author/tambah-anamnesa'))
+@if (request()->is('author/show-data-pasien') or
+    request()->is('author/tambah-anamnesa') or
+    request()->is('author/tambah-anamnesa/*'))
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endif

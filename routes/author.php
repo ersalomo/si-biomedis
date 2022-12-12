@@ -46,4 +46,5 @@ Route::prefix('author')
         Route::get('my-profile', [AdminProfileController::class, 'profile'])->name('my-profile');
         Route::resource('obat', ObatController::class);
         Route::get('get-drugs', [ObatController::class, 'getDrugs'])->name('getDrugs');
+        Route::get('get-pasiens2', [AnamnesaController::class, 'getPasiens'])->name('getPasiens'); // duplicate
     });
