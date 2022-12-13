@@ -8,6 +8,8 @@ use Illuminate\Http\{
     Request,
     JsonResponse
 };
+use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
 
 class ObatController extends Controller
 {
@@ -16,16 +18,41 @@ class ObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $listerner = [
+        'index' => '$refresh'
+    ];
     public function index()
     {
         return view('author.content.obat.data-obat', [
             'drugs' => ObatModel::get(),
         ]);
-        // return view('content.admin.home.obat.data-obat', [
-        //     'drugs' => ObatModel::get(),
-        // ]);
     }
 
+    public function dataObat(Request $reqeust)
+    {
+        $drugs = ObatModel::get();
+        return Datatables::of($drugs)
+            ->editColumn('created_at', function ($date) {
+                if ($date) {
+                    return Carbon::parse($date->created_at)->format('Y-m-d');
+                }
+            })
+            ->addColumn('action', function ($data) {
+
+                $url_edit = url('author/edit/' . $data->id);
+                $url_hapus = url('author/obat/' . $data->id); //href="' . $url_hapus . '"
+                $tdObat = '<a href="' . $url_edit . '" class="me-2"><i class="fa fa-pen"></i></a>';
+                $tdObat .= '<a class="me-3" href="javascript:void(0);" data-item="{{ $drug->id }}"
+                                            data-url="' . $url_hapus . '"
+                                            data-name="' . $data->nama_obat . '" onclick="deleteObat(this)">
+                                            <i class="fa fa-trash"></i>
+                            </a>
+                ';
+                return $tdObat;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -58,7 +85,6 @@ class ObatController extends Controller
                 'errors' => $validator->errors()->toArray(),
             ], 422);
         } else {
-
             $save = ObatModel::create($request->all());
             if ($save) {
                 return response()->json([
@@ -79,20 +105,12 @@ class ObatController extends Controller
 
     public function getDrugs(Request $request)
     {
-        $search = $request->search;
-        if ($search == '') {
-            $drugs = ObatModel::orderBy('nama_obat', 'ASC')->limit(5)->get();
-        } else {
-            $drugs = ObatModel::orderBy('nama_obat', 'ASC')->where('nama_obat', 'like', '%' . $search . '%')
+        if ($request->has('q')) {
+            $drugs = ObatModel::orderBy('nama_obat', 'ASC')->where('nama_obat', 'like', '%' . $request->q . '%')
                 ->limit(5)->get();
+        } else {
+            $drugs = ObatModel::orderBy('nama_obat', 'ASC')->limit(5)->get();
         }
-        // $response = array();
-        // foreach ($drugs as $drug) {
-        //     $response[] = array(
-        //         "id" => $drug->id,
-        //         "text" => $drug->name
-        //     );
-        // }
         return response()->json($drugs);
     }
 
@@ -144,12 +162,20 @@ class ObatController extends Controller
      */
     public function destroy(ObatModel $obat): JsonResponse
     {
-        $obat->deleteOrFail();
-        return response()->json(array(
-            'success' => true,
-            'title' => 'Delete data Obat',
-            'icon' => 'success',
-            'message' => 'Berhasil menghapus data obat!'
-        ), 200);
+        $query = $obat->deleteOrFail();
+        if ($query) {
+            return response()->json(array(
+                'success' => true,
+                'title' => 'Delete data Obat',
+                'icon' => 'success',
+                'message' => 'Berhasil menghapus data obat!'
+            ), 200);
+        } else {
+            return response()->json([
+                'success' => true,
+                'status' => false,
+                'message' => 'There something went wrong!'
+            ], 400);
+        }
     }
 }

@@ -6,12 +6,12 @@
     <script src="/dist/assets/extensions/apexcharts/apexcharts.min.js"></script>
     <script src="/dist/assets/js/pages/dashboard.js"></script>
 @endif
-@if (request()->is('author/show-data-pasien'))
-    <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
-    {{-- <script src="/dist/assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.js"></script>
+{{-- @if (request()->is('author/show-data-pasien') or request()->is('author/obat')) --}}
+<script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
+{{-- <script src="/dist/assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.js"></script>
     <script src="/dist/assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script> --}}
-    <script src="/dist/assets/js/pages/datatables.js"></script> // tidak penting
-@endif
+<script src="/dist/assets/js/pages/datatables.js"></script> // tidak penting
+{{-- @endif --}}
 <script src="/dist/assets/extensions/toastify-js/src/toastify.js"></script>
 @if (request()->is('author/show-data-pasien') or
     request()->is('author/tambah-anamnesa') or

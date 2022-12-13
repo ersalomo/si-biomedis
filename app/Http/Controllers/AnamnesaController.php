@@ -18,24 +18,31 @@ class AnamnesaController extends Controller
         ]);
     }
 
-    public function tambahAnamnesa(Pasien $pasien)
+    // public function tambahAnamnesa(Pasien $pasien)
+    public function tambahAnamnesa($pasien = null)
     {
         $this->authorize('notForAdmin');
-        $name = '';
-        if ($pasien) $name = $pasien;
-        return view('author.content.anamnesa.add-anamnesa', [
-            'name' => $name
-        ]);
+        if ($pasien) {
+            $pasien = Pasien::where('uuid', $pasien)->get();
+        }
+        // $name = '';
+        // if ($pasien) $name = $pasien;
+        return view(
+            'author.content.anamnesa.add-anamnesa'
+        )->with('pasien', $pasien ?? '');
     }
 
     public function getPasiens(Request $request)
     {
-        $search = $request->search;
-        if ($search == '') {
-            $drugs = Pasien::orderBy('nama', 'ASC')->limit(5)->get();
+        $getBy = ['uuid', 'nama'];
+        if ($request->has('q')) {
+            $drugs = Pasien::orderBy('nama', 'ASC')->where('nama', 'like', '%' . $request->q . '%')
+                ->limit(5)
+                ->get($getBy);
         } else {
-            $drugs = Pasien::orderBy('nama', 'ASC')->where('nama', 'like', '%' . $search . '%')
-                ->limit(5)->get();
+            $drugs = Pasien::orderBy('nama', 'ASC')
+                ->limit(5)
+                ->get($getBy);
         }
         return response()->json($drugs);
     }

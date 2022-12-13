@@ -11,10 +11,11 @@ use App\Models\RegistrasiPasien  as Pasien;
 
 class PasienController extends Controller
 {
-    public function showDataPasien()
+    public function index()
     {
         return view('author.content.pasien.data-pasien', []);
     }
+
     public function getDataPasiens()
     {
         $pasiens = Pasien::get();
@@ -42,10 +43,58 @@ class PasienController extends Controller
     public function tambahPasien()
     {
         $this->authorize('notForDocter');
-
-        // return view('content.admin.home.tambah-pasien');
         return view('author.content.pasien.add-pasien');
     }
+    public function detailPasiens($id)
+    {
+        $pasien = Pasien::find($id);
+        if ($pasien) {
+            return response()->json([
+                'status' => true,
+                'data' => $pasien
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], 404);
+        }
+    }
+    public function update(RequestPasien $request, string $id)
+    {
+        $validator =  Validator::make(
+            $request->all(),
+            $request->rules(),
+            $request->messages()
+        );
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->messages()->toArray(),
+            ]);
+        } else {
+            $pasien = Pasien::findOrFail($id);
+            $pasien->nama = $request->nama;
+            $pasien->umur = $request->umur;
+            $pasien->gender = $request->gender;
+            $pasien->alamat = $request->alamat;
+            $pasien->pekerjaan = $request->pekerjaan;
+            $save = $pasien->save();
+            if ($save) {
+                return response()->json([
+                    'status' => 1,
+                    'title' => 'Successfully Added',
+                    'msg' => 'New data pasien has been successfully added'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'error' => 'There something went wrong',
+                ]);
+            }
+        }
+    }
+
     public function store(RequestPasien $req)
     {
         $this->authorize('notForDocter');
@@ -66,6 +115,7 @@ class PasienController extends Controller
             }
         }
     }
+
     public function confirmationDelete($id)
     {
         return response()->json(
@@ -79,6 +129,7 @@ class PasienController extends Controller
             200
         );
     }
+
     public function delete(Pasien $pasien)
     {
         $pasien->delete();

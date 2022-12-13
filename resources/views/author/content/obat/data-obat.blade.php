@@ -17,8 +17,8 @@
             <div class="card-body">
                 <div class="">
                     <div id="" class="">
-                        <table class="table" id="" role="grid" aria-describedby="">
-                            <thead>
+                        <table class="table text-black" id="table-obat" role="grid" aria-describedby="">
+                            {{-- <thead>
                                 <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="" rowspan="1" colspan="1"
                                         aria-sort="ascending" aria-label="" style="width: 38.5938px;">
@@ -66,7 +66,7 @@
                                     </tr>
                                 @endforeach
 
-                            </tbody>
+                            </tbody> --}}
                         </table>
                     </div>
                 </div>
@@ -104,8 +104,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Jumlah Stok</label>
-                                    <input id="umur" name="jumlah_stok" value="{{ old('jumlah_stok') }}"
-                                        type="number" class="form-control text" placeholder="enter jumlah stok">
+                                    <input id="umur" name="jumlah_stok" value="{{ old('jumlah_stok') }}" type="number"
+                                        class="form-control text" placeholder="enter jumlah stok">
                                     <span class="text-danger error-text jumlah_stok_error"></span>
                                 </div>
                             </div>
@@ -188,6 +188,44 @@
                 }
             });
         }
+        $('#table-obat').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'pdf', 'csv', 'print'
+            ],
+            "lengthMenu": [
+                [10, 25, 50, 100, 1000, -1],
+                ['10 rows', '25 rows', '50 rows', '100 rows', 'All']
+            ],
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('author.obat.obat') }}",
+            columns: [{
+                    data: 'nama_obat',
+                    title: 'Nama Obat'
+                },
+                {
+                    data: 'jenis_obat',
+                    title: 'Jenis Obat'
+                },
+                {
+                    data: 'jumlah_stok',
+                    title: 'Jumlah Stok'
+                },
+                {
+                    data: 'satuan',
+                    title: 'Satuan'
+                },
+                {
+                    data: 'desc',
+                    title: 'Keterangan'
+                },
+                {
+                    data: 'action',
+                    title: 'Action'
+                }
+            ]
+        })
     </script>
     <script>
         $(function() {
