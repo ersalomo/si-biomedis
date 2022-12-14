@@ -43,7 +43,7 @@
                             <div class="form-group">
                                 <label>Umur</label>
                                 <input id="umur" name="umur" value="{{ old('umur') }}" type="number"
-                                    class="form-control text-dark" placeholder="umur anda">
+                                    class="form-control text-black" placeholder="umur anda">
                                 <span class="text-danger error-text umur_error"></span>
                             </div>
                         </div>

@@ -35,7 +35,7 @@
                     @endif
                 </div>  --}}
                 <div class="login100-pic js-tilt" data-tilt>
-                    <img src="{{ asset('Login_v1/images/img-01.png') }}" alt="IMG">
+                    <img src="/dist/assets/images/logo/logo.jfif" alt="IMG">
                 </div>
 
                 <form action="{{ route('auth.login') }}" method="post" class="login100-form validate-form">
