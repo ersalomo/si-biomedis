@@ -28,7 +28,7 @@ class AnamnesaController extends Controller
         // $name = '';
         // if ($pasien) $name = $pasien;
         return view(
-            'author.content.anamnesa.add-anamnesa'
+            'author/content/anamnesa/add-anamnesa'
         )->with('pasien', $pasien ?? '');
     }
 
@@ -59,19 +59,31 @@ class AnamnesaController extends Controller
                 'error' => $validator->errors()->toArray(),
             ], 422);
         }
-        $anamnesa = Anamnesa::create($req->all());
-        if ($anamnesa) {
-            return response()->json([
-                'status' => true,
-                'statusCode' => 201,
-                'message' => 'Berhasil menambah anamnesa pasien',
-            ], 201);
-        } else {
-            return response()->json([
-                'status' => false,
-                'statusCode' => 500,
-                'message' => 'There are something went wrong!',
-            ], 500);
+        if ($validator->passes()) {
+            $anamnesa = Anamnesa::create($req->all());
+            if ($anamnesa) {
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 201,
+                    'message' => 'Berhasil menambah anamnesa pasien',
+                ], 201);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 500,
+                    'message' => 'There are something went wrong!',
+                ], 500);
+            }
         }
+    }
+
+    public function destroy($id)
+    {
+        $anamnesa = Anamnesa::findOrFail($id)->delete();
+        return response()->json([
+            'status' => true,
+            'statusCode' => 200,
+            'message' => 'Data berhasil dihapus'
+        ], 200);
     }
 }

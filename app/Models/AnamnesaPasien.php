@@ -30,6 +30,8 @@ class AnamnesaPasien extends Model
 
     public function obat(): BelongsTo
     {
-        return $this->belongsTo(ObatModel::class, 'id_obat');
+        return $this->belongsTo(ObatModel::class, 'id_obat')->withDefault([
+            'nama_obat' => '<p class="badge badge-primary text-black">Empty Field</p>'
+        ]);
     }
 }

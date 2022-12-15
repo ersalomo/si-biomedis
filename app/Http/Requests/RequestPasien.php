@@ -25,7 +25,7 @@ class RequestPasien extends FormRequest
     {
 
         return [
-            '*'             => ['required'],
+            // '*'             => ['required'],
             'nama'          => ['string'],
             'jenis_pasien'  => ['string'],
             // 'tanggal_lahir' => [],

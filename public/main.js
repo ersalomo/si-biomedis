@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(() =>{
     $("#form-pasien").on("submit", (e) => {
         e.preventDefault();
             $.ajax({

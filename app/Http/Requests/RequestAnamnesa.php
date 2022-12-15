@@ -25,7 +25,7 @@ class RequestAnamnesa extends FormRequest
     {
         return [
             'uuid_pasien' => ['required'],
-            'id_obat' => ['required'],
+            'id_obat' => ['nullable'],
             'anamnesa' => ['required', 'string'],
             'diagnosa' => ['required', 'string'],
             'pengobatan' => ['required', 'string'],

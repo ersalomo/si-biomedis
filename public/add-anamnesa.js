@@ -9,7 +9,7 @@
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         data: new FormData(e.target),
         beforeSend: () => {
-            console.log('hallo')
+             $(e.target).find("span.error-text").text("");
         },
         success: (res) => {
             console.log(res)
@@ -25,8 +25,10 @@
                             // selector: $('#modal-obat').modal('hide'),
                         }).showToast();
         },
-        error: (res) =>{
-            console.log(res)
+        error: (res) => {
+            $.each(res.responseJSON.errors, (prefix, val) => {
+                        $("span." + prefix + "_error").text(val[0]);
+                    });
         }
         })
 })

@@ -69,7 +69,9 @@
                             <h5 class="font-bold">
                                 <a href="{{ route('author.my-profile') }}">{{ auth()->user()->name }}</a>
                             </h5>
-                            <h6 class="text-muted mb-0">@ {{ auth()->user()->rolename->role }}</h6>
+                            <h6 class="text-muted">
+                                @-{{ __(auth()->user()->rolename->role) }}
+                            </h6>
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,8 @@
                 </div>
                 <div class="table-responsive">
                     <div id="" class="">
-                        <table class="table" id="" role="grid" aria-describedby="">
+                        <table class="table table-group-divider table-responsive table-hover table-condensed" id=""
+                            role="grid" aria-describedby="">
                             <thead>
                                 <tr role="row">
                                     <th class="" style="width:130px;">Tanggal</th>
@@ -43,19 +44,18 @@
                                         <td class="">{{ $anamnesa->pasien[0]->nama }}</td>
                                         <td>{{ $anamnesa->anamnesa }}</td>
                                         <td>{{ $anamnesa->diagnosa }} </td>
-                                        <td>{{ __($anamnesa->obat->nama_obat) }} </td>
+                                        <td>{!! __($anamnesa->obat->nama_obat) !!} </td>
                                         <td>{{ $anamnesa->pengobatan }}</td>
                                         <td>
-                                            <a class="me-3" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
+                                            <button class="me-3 btn btn-primary" onclick="deleteAnamnesa(this)"
+                                                data-id="{{ $anamnesa->id }}"><i class="fa fa-trash"></i>
+                                            </button>
                                             <a class="me-3" href="">
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>
@@ -66,33 +66,78 @@
 @endsection
 @push('scripts')
     <script>
-        $('#bnAddAnamnesa').on('click', function(e) {
-            $.ajax({
-                url: "{{ route('author.tambah-anamnesa') }}",
-                method: 'get',
-                processData: false,
-                contentType: false,
-                dataType: 'json', // added data type
-                statusCode: {
-                    403: (res) => {
-                        var response = res.responseJSON
-                        console.log(response)
-                        Swal.fire({
-                            title: "error",
-                            html: `<strong>${response.message}</strong>`,
-                            icon: "error",
-                        })
-                    },
-                    200: (res) => {
-                        window.location.href = "http://127.0.0.1:8000/author/tambah-anamnesa"
-                    }
-                },
-                success: function(res) {
-                    console.log(res);
-                    alert(res);
+        function deleteAnamnesa(button) {
+            const id = button.getAttribute('data-id')
+            const url = '{{ url('author/delete-anamnesa/') }}'
+            const name = button.getAttribute('data-name') ?? ''
+            swal.fire({
+                title: "Hapus data?",
+                imageWidth: 60,
+                imageHeight: 48,
+                html: `Apakah kamu yakin ingin menghapus data <b>${name}</b>?`,
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Yes, delete',
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
+                width: 350,
+                allowOutsideClick: false
+            }).then(function(result) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url + '/' + id,
+                        method: "delete",
+                        dataType: 'json',
+                        processData: false,
+                        contentType: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: (res) => {
+                            Toastify({
+                                avatar: '/dist/assets/images/icon/warning.png',
+                                text: `Data obat ${name} deleted successfully`,
+                                duration: 2500,
+                                close: true,
+                                gravity: "top",
+                                position: "center",
+                                backgroundColor: "#f59f00",
+                                callback: () => window.location.reload(),
+                            }).showToast()
+                        },
+                    })
                 }
             });
-
+        }
+        $(document).ready(() => {
+            $('#bnAddAnamnesa').on('click', function(e) {
+                $.ajax({
+                    url: "{{ route('author.tambah-anamnesa') }}",
+                    method: 'get',
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json', // added data type
+                    statusCode: {
+                        403: (res) => {
+                            var response = res.responseJSON
+                            console.log(response)
+                            Swal.fire({
+                                title: "error",
+                                html: `<strong>${response.message}</strong>`,
+                                icon: "error",
+                            })
+                        },
+                        200: (res) => {
+                            window.location.href = "{{ route('author.tambah-anamnesa') }}"
+                        }
+                    },
+                    success: function(res) {
+                        console.log(res);
+                        alert(res);
+                    }
+                });
+            })
         })
     </script>
 @endpush

@@ -34,16 +34,16 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Tanggal lahir</label>
-                                <input name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" type="date"
-                                    class="form-control">
+                                <input name="tanggal_lahir" onchange="setUmurValue(this.value)"
+                                    value="{{ old('tanggal_lahir') }}" type="date" class="form-control">
                                 <span class="text-danger error-text tanggal_lahir_error"></span>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Umur</label>
-                                <input id="umur" name="umur" value="{{ old('umur') }}" type="number"
-                                    class="form-control text-black" placeholder="umur anda">
+                                <input id="umur" name="umur" type="number" class="form-control text-black"
+                                    placeholder="umur anda">
                                 <span class="text-danger error-text umur_error"></span>
                             </div>
                         </div>
@@ -67,8 +67,8 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label>Pekerjaan</label>
-                                <textarea name="pekerjaan" value="{{ old('pekerjaan') }}" class="form-control" style="height: 60px;"></textarea>
+                                <label>Pekerjaan <span class="text-muted">optional</span></label>
+                                <textarea name="pekerjaan" class="form-control" style="height: 60px;"></textarea>
                                 <span class="text-danger error-text pekerjaan_error"></span>
                             </div>
                         </div>
@@ -83,5 +83,15 @@
     </div>
 @endsection
 @push('scripts')
+    <script>
+        function setUmurValue(value) {
+            const date = new Date()
+            const year = date.getFullYear()
+            const umur = value.split('-')[0]
+            if ((umur).toString().length == 4) {
+                document.getElementById('umur').value = year - umur
+            }
+        }
+    </script>
     <script src="{{ asset('main.js') }}" type="text/javascript"></script>
 @endpush

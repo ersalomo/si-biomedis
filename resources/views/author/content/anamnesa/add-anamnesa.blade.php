@@ -23,70 +23,37 @@
                                     <select id='sel_name' name="uuid_pasien" class="form-control">
                                         <option value="0">--select name--</option>
                                 @endif
-
                                 </select>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Anamnesa</label>
-                                <textarea name="anamnesa" placeholder="anamnesa..."
-                                    class="form-control @error('anamnesa')
-                                    is-invalid
-                                @enderror"
-                                    style="height: 60px;"></textarea>
-                                @error('anamnesa')
-                                    <span class="text-danger">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
+                                <textarea name="anamnesa" placeholder="anamnesa..." class="form-control" style="height: 60px;"></textarea>
+                                <span class="text-danger error-text anamnesa_error"></span>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Diagnosa</label>
-                                <textarea name="diagnosa" placeholder="diagnosa..."
-                                    class="form-control @error('diagnosa')
-                                is-invalid
-                            @enderror"
-                                    style="height: 60px;"></textarea>
-                                @error('diagnosa')
-                                    <span class="text-danger">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
+                                <textarea name="diagnosa" placeholder="diagnosa..." class="form-control" style="height: 60px;"></textarea>
+                                <span class="text-danger error-text diagnosa_error"></span>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Obat Yang Dipakai</label>
-                                <select id='sel_emp' name="id_obat"
-                                    class="form-control @error('id_obat')
-                                is-invalid
-                            @enderror"
-                                    value="{{ old('id_obat') }}">
+                                <select id='sel_emp' name="id_obat" class="form-control">
                                     <option value='0'>-- Select nama obat --</option>
                                 </select>
                             </div>
-                            @error('id_obat')
-                                <span class="text-danger">
-                                    {{ $message }}
-                                </span>
-                            @enderror
+                            <span class="text-danger error-text id_obat_error"></span>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Pengobatan</label>
-                                <textarea name="pengobatan" placeholder="pengobatan..."
-                                    class="form-control @error('pengobatan')
-                                is-invalid
-                            @enderror"
-                                    style="height: 60px;"></textarea>
-                                @error('pengobatan')
-                                    <span class="text-danger">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
+                                <textarea name="pengobatan" placeholder="pengobatan..." class="form-control" style="height: 60px;"></textarea>
+                                <span class="text-danger error-text pengobatan_error"></span>
                             </div>
                         </div>
                         <div class="col-lg-12">

@@ -25,7 +25,6 @@ Route::prefix('author')
     ->middleware('auth:web')
     ->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-
         Route::get('dashboard', [DashboardController::class, 'index']);
         Route::get('visit-pasiens', [DashboardController::class, 'getVisitAllPasien'])->name('visit-pasiens');
         Route::controller(PasienController::class)->group(function () {
@@ -36,7 +35,8 @@ Route::prefix('author')
             Route::get('confirmation-delete/{id}', 'confirmationDelete')->name('confirmation-delete'); // tidak boleh, dokter hanya bisa dilakukan oleh admin ke aatas
             Route::get('get-pasiens', 'getDataPasiens')->name('get-patiens');
             Route::get('detail-pasien/{id}', 'detailPasiens')->name('detailPasiens');
-            Route::patch('update-pasien/{id}', 'update')->name('updatePasien');
+            Route::get('edit-pasien/{id?}', 'edit')->name('editPasien');
+            Route::post('update-pasien/{id}', 'update')->name('updatePasien');
         });
 
         Route::controller(AnamnesaController::class)->group(function () {
@@ -44,6 +44,7 @@ Route::prefix('author')
             // Route::get('tambah-anamnesa/{pasien:uuid?}', 'tambahAnamnesa')->name('tambah-anamnesa');
             Route::get('tambah-anamnesa/{pasien?}', 'tambahAnamnesa')->name('tambah-anamnesa');
             Route::post('tambah', 'create')->name('create-anamnesa');  //tidak boleh ,admin hanya melihat data anamnesa
+            Route::delete('delete-anamnesa/{id}', 'destroy')->name('delete-anamnesa');  //tidak boleh ,admin hanya melihat data anamnesa
         });
 
         Route::get('my-profile', [AdminProfileController::class, 'profile'])->name('my-profile');

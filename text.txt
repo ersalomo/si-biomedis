@@ -1,0 +1,5 @@
+list :
+-ubah gambar logo "Mazer"nya jadi yg gw kasih
+-data anamnesa blm bisa dibuka
+-field obat dibikin nullable (soalnya obat di tempat praktik tidak lengkap)
+-kalo bisa umur otomatis dari tanggal lahir

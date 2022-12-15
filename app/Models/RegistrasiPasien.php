@@ -28,4 +28,13 @@ class RegistrasiPasien extends Model
     //         get: fn ($date) => $date ?  Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d') : '',
     //     );
     // }
+
+    public function scopeSearch($q, $term)
+    {
+        $term = "%$term%";
+        $q->where(function ($query) use ($term) {
+            $query->where('name', 'like', $term)
+                ->orWhere('alamat', 'like', $term);
+        });
+    }
 }

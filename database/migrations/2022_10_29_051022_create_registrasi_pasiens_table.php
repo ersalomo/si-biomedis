@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('umur');
             $table->enum('jenis_kelamin', ['pria', 'wanita']);
             $table->string('alamat');
-            $table->string('pekerjaan');
+            $table->string('pekerjaan')->nullable();
             $table->timestamps();
         });
     }

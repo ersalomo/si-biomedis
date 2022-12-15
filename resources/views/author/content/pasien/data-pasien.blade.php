@@ -49,20 +49,23 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `{{ url('d/delete-pasien/${idPasien}') }}`,
+                        url: `{{ url('author/delete-pasien/${idPasien}') }}`,
                         method: "delete",
                         dataType: 'json',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: (res) => {
-                            Swal.fire({
-                                title: res.title,
-                                icon: res.icon,
-                                text: res.message
-                            }).then(function(res) {
-                                window.location.reload();
-                            })
+                            Toastify({
+                                avatar: '/dist/assets/images/icon/sucess.png',
+                                text: `Data pasien delete successfully`,
+                                duration: 2500,
+                                close: true,
+                                gravity: "top",
+                                position: "center",
+                                backgroundColor: "#2fb344",
+                                selector: $('#table-pasien').DataTable().ajax.reload(),
+                            }).showToast();
                         },
                     })
                 }
@@ -80,12 +83,12 @@
                     'excel', 'pdf', 'csv', 'print'
                 ],
                 "lengthMenu": [
-                    [10, 25, 50, 100, 1000, -1],
-                    ['10 rows', '25 rows', '50 rows', '100 rows', 'All']
+                    [5, 10, 25, 50, 100, 1000, -1],
+                    ['5 rows', '10 rows', '25 rows', '50 rows', '100 rows', 'All']
                 ],
                 processing: true,
-                serverSide: true,
-                ajax: "{{ route('author.get-patiens') }}",
+                serverSide: false,
+                ajax: "{{ route('author.get-patiens', []) }}",
                 columns: [{
                         width: '90px',
                         title: 'Action',

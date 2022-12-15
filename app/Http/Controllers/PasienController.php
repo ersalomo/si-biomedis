@@ -8,6 +8,7 @@ use App\Http\Requests\RequestPasien;
 // use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Support\Facades\Validator;
 use App\Models\RegistrasiPasien  as Pasien;
+use Illuminate\Http\Request;
 
 class PasienController extends Controller
 {
@@ -16,9 +17,13 @@ class PasienController extends Controller
         return view('author.content.pasien.data-pasien', []);
     }
 
-    public function getDataPasiens()
+    public function getDataPasiens(Request $request)
     {
-        $pasiens = Pasien::get();
+        if ($request->has('q')) {
+            $pasiens = Pasien::search(trim($request->q))->get();
+        } else {
+            $pasiens = Pasien::get();
+        }
         return Datatables::of($pasiens)
             ->editColumn('created_at', function ($date) {
                 if ($date) {
@@ -26,7 +31,7 @@ class PasienController extends Controller
                 }
             })
             ->addColumn('action', function ($data) {
-                $url_edit = url('author/edit/' . $data->uuid);
+                $url_edit = url('author/edit-pasien/' . $data->uuid);
                 $url_hapus = url('author/delete-pasien/' . $data->uuid); //href="' . $url_hapus . '"
                 $tdPasien = '<a href="' . $url_edit . '" class=""><i class="fa fa-pen"></i></a>';
                 $tdPasien .= '<button class="btn" onclick="deletePasien(this);" data-item="' . $data->uuid . '"><i class="fa fa-trash"></i></button>';
@@ -45,9 +50,18 @@ class PasienController extends Controller
         $this->authorize('notForDocter');
         return view('author.content.pasien.add-pasien');
     }
+
+    public function edit($id = null)
+    {
+
+        return view('author.content.pasien.edit-pasien', [
+            'pasien' => $id ? Pasien::find($id) : [],
+        ]);
+    }
+
     public function detailPasiens($id)
     {
-        $pasien = Pasien::find($id);
+        $pasien = Pasien::findOFail($id);
         if ($pasien) {
             return response()->json([
                 'status' => true,
@@ -60,25 +74,30 @@ class PasienController extends Controller
             ], 404);
         }
     }
-    public function update(RequestPasien $request, string $id)
+
+    public function update($id = null, RequestPasien $request)
     {
+
         $validator =  Validator::make(
             $request->all(),
             $request->rules(),
             $request->messages()
         );
-        if ($validator->fails()) {
+        if (!$validator->passes()) {
             return response()->json([
                 'status' => false,
                 'errors' => $validator->messages()->toArray(),
             ]);
         } else {
             $pasien = Pasien::findOrFail($id);
+            // ->update($request->all());
             $pasien->nama = $request->nama;
             $pasien->umur = $request->umur;
-            $pasien->gender = $request->gender;
+            $pasien->jenis_kelamin = $request->jenis_kelamin;
             $pasien->alamat = $request->alamat;
+            $pasien->jenis_pasien = $request->jenis_pasien;
             $pasien->pekerjaan = $request->pekerjaan;
+            $pasien->updated_at = now()->format('Y-m-d');
             $save = $pasien->save();
             if ($save) {
                 return response()->json([
@@ -98,22 +117,23 @@ class PasienController extends Controller
     public function store(RequestPasien $req)
     {
         $this->authorize('notForDocter');
+        // $data = Pasien::create($req->all());
         $validator =  Validator::make($req->all(), $req->rules(), $req->messages());
-        if ($validator->fails()) {
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 0,
+        //         'error' => $validator->errors()->toArray(),
+        //     ], 422);
+        // } else {
+        $data = Pasien::create($req->all());
+        if ($data) {
             return response()->json([
-                'status' => 0,
-                'error' => $validator->errors()->toArray(),
-            ]);
-        } else {
-            $data = Pasien::create($req->all());
-            if ($data) {
-                return response()->json([
-                    'status' => 1,
-                    'title' => 'Successfully Added',
-                    'msg' => 'New data pasien has been successfully added'
-                ]);
-            }
+                'status' => 1,
+                'title' => 'Successfully Added',
+                'msg' => 'New data pasien has been successfully added'
+            ], 200);
         }
+        // }
     }
 
     public function confirmationDelete($id)
