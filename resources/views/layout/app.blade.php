@@ -16,10 +16,10 @@
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
+                        <img src="/dist/assets/images/logo/logo.jfif" lazy-loading style="" class="h-100 w-50"
+                            alt="Logo" srcset="">
                         <div class="logo">
                             <a href="">
-                                <img src="/dist/assets/images/logo/logo.jfif" style="width: 100%;" class="img-fluid"
-                                    alt="Logo" srcset="">
                             </a>
                         </div>
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">

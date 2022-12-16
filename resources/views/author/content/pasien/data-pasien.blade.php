@@ -20,7 +20,7 @@
             </div>
             <div class="table-responsive">
                 <div id="" class="">
-                    <table class="table text-black" id="table-pasien" role="grid" aria-describedby="">
+                    <table class="table text-black table-hover" id="table-pasien" role="grid" aria-describedby="">
                     </table>
                 </div>
             </div>
@@ -75,7 +75,6 @@
             })
 
         }
-
         $(document).ready(function() {
             $('#table-pasien').DataTable({
                 dom: 'lBfrtip',

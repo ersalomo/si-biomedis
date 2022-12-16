@@ -53,7 +53,7 @@ class PasienController extends Controller
 
     public function edit($id = null)
     {
-
+        $this->authorize('notForDocter');
         return view('author.content.pasien.edit-pasien', [
             'pasien' => $id ? Pasien::find($id) : [],
         ]);

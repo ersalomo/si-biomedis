@@ -60,7 +60,7 @@
         </div>
         <div class="col-12 col-lg-3">
             <div class="card">
-                <div class="card-body py-4 px-4">
+                <div class="card-body py-3 px-3">
                     <div class="d-flex align-items-center">
                         <div class="avatar avatar-xl">
                             <img src="/dist/assets/images/1.jpg" alt="Face 1">
@@ -70,7 +70,7 @@
                                 <a href="{{ route('author.my-profile') }}">{{ auth()->user()->name }}</a>
                             </h5>
                             <h6 class="text-muted">
-                                @-{{ __(auth()->user()->rolename->role) }}
+                                @<span></span>{{ __(auth()->user()->rolename->role) }}
                             </h6>
                         </div>
                     </div>
@@ -85,7 +85,6 @@
                     </div>
                     <div class="card-body">
                         <div id="chart-kunjungan-pasien" style="min-height: 315px;">
-
                         </div>
                     </div>
                 </div>
